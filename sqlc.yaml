@@ -1,0 +1,48 @@
+version: "2"
+sql:
+  - engine: "postgresql"
+
+    # "schema" tells sqlc where your CREATE TABLE / CREATE TYPE statements are.
+    # It reads your migration .up.sql files to understand your database schema.
+    schema: "./cmd/migrate/migrations"
+
+    # "queries" tells sqlc where your annotated SQL query files are.
+    queries: "./internal/store/queries"
+
+    gen:
+      go:
+        # Where sqlc puts the generated Go files.
+        # You should NEVER edit files in this directory — re-run `sqlc generate` instead.
+        out: "./internal/store/dbsqlc"
+
+        # The Go package name for the generated code.
+        package: "dbsqlc"
+
+        # THIS IS THE KEY SETTING: tells sqlc to generate code that uses
+        # pgx/v5 natively instead of database/sql. The generated Queries
+        # struct will accept a pgxpool.Pool, pgx.Conn, or pgx.Tx — anything
+        # that satisfies the generated DBTX interface.
+        sql_package: "pgx/v5"
+
+        # Include json struct tags on generated models.
+        emit_json_tags: true
+
+        # Return empty slices [] instead of null for :many queries with no results.
+        # This is important for JSON APIs — [] is better than null.
+        emit_empty_slices: true
+
+        overrides:
+          # Map PostgreSQL uuid → google/uuid.UUID.
+          # Without this, sqlc would use pgx's pgtype.UUID, which is a
+          # different type than what your domain code uses.
+          - db_type: "uuid"
+            go_type:
+              import: "github.com/google/uuid"
+              type: "UUID"
+
+          # Map the status_type PostgreSQL enum → Go string.
+          # This keeps compatibility with your existing StatusType
+          # (which is `type StatusType string`). Your IssueStore
+          # translates between string and StatusType.
+          - db_type: "status_type"
+            go_type: "string"

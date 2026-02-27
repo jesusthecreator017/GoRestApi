@@ -1,0 +1,49 @@
+# Go
+bin/
+tmp/
+api
+migrate
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Environment
+.env
+.env.*
+.envrc
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Node (root-level artifacts from shadcn/tooling)
+node_modules/
+/package.json
+/pnpm-lock.yaml
+
+# Frontend (web/)
+web/node_modules/
+web/dist/
+web/dist-ssr/
+web/.next/
+*.local
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Air live reload
+tmp/
