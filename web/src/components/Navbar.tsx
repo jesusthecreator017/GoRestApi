@@ -10,6 +10,7 @@ import {
 	AlertCircle,
 	Shield,
 	LogOut,
+	User,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -108,6 +109,17 @@ export function Navbar() {
 									<Link href="/issues">
 										<AlertCircle className="mr-2 size-4" />
 										Issues
+									</Link>
+								</Button>
+								<Button
+									variant="ghost"
+									className="justify-start"
+									asChild
+									onClick={() => setOpen(false)}
+								>
+									<Link href="/profile">
+										<User className="mr-2 size-4" />
+										Profile
 									</Link>
 								</Button>
 							</div>
