@@ -84,9 +84,7 @@ export default function ProfilePage() {
 
 						<div className="flex items-center gap-2">
 							<Shield className="text-muted-foreground size-4" />
-							<span className="text-muted-foreground text-sm">
-								Permissions
-							</span>
+							<span className="text-muted-foreground text-sm">Permissions</span>
 						</div>
 						<div className="flex gap-1">
 							{permissions.map((perm) => (
