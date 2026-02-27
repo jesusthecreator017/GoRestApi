@@ -1,6 +1,6 @@
 "use client";
 
-import { User } from "@/schemas/user";
+import type { User } from "@/schemas/user";
 import { useQueryClient } from "@tanstack/react-query";
 import { useContext, useEffect, useState, createContext } from "react";
 

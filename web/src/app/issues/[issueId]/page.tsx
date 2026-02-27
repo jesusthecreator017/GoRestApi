@@ -15,7 +15,7 @@ export default function IssuePage() {
 	} = useQuery({
 		queryKey: ["issues", id],
 		queryFn: () => issuesApi.getById(id),
-		enabled: !isNaN(id),
+		enabled: !Number.isNaN(id),
 	});
 
 	if (isLoading) {
